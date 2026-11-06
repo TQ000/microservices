@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+            # 使用本地路径创建缓存副本，避免 Config Server 直接操作项目工作区。
+            uri: /home/minxilou/devtalles/microservices-ecommerce
+            search-paths: config-data
+            clone-on-start: true
+            # config-server no se conecta al git hasta q el 1º microservicio se lo solicite,
+            # clone-on-start: true obligue q se conecte al git(carpeta) a penas q se arranque
+            default-label: main
+            # anteriomente se llama master, si no pone main, se va a buscar en master
+            # y no va a encontrar nada
+server:
+    port: 8888
