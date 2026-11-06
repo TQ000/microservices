@@ -5,6 +5,10 @@ import com.ecommerce.inventory_service.dto.InventoryResponse;
 import com.ecommerce.inventory_service.service.InventoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +17,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/inventory")
 @RequiredArgsConstructor
+@RefreshScope 
+@Slf4j 
 public class InventoryController {
     private final InventoryService inventoryService;
 
+    @Value ("${inventory.allow-backorders:false}")
+    private boolean allowBackorder;
 
     @GetMapping("/{sku}")
     @ResponseStatus(HttpStatus.OK)
     public boolean isInStock(@PathVariable("sku") String sku,@RequestParam("quantity") Integer quantity){
+        if(allowBackorder){
+            log.info("MODO BACKORDER ACTIVO: Autirizando stock para sku: {}", sku);
+            return true;
+        }
+        
         return inventoryService.isInStock(sku, quantity);
     }
-
+ 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public InventoryResponse createInventory(@Valid @RequestBody InventoryRequest inventoryRequest){
