@@ -1,0 +1,8 @@
+# Configuration belongs in the sibling private repository.
+/config-data/
+/ecommerce-config/
+
+# Local credentials; only examples may be versioned.
+.env
+.env.*
+!.env.example
