@@ -19,6 +19,7 @@ import com.ecommerce.product_service.dto.ProductRequestDTO;
 import com.ecommerce.product_service.dto.ProductResponseDTO;
 import com.ecommerce.product_service.service.ProductService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +43,9 @@ public class ProductController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ProductResponseDTO> getAllProducts(HttpServletResponse response){
+    public List<ProductResponseDTO> getAllProducts(HttpServletResponse response, HttpServletRequest request){
         response.addHeader("x-maintenance", maintenanceMessage);
+        System.out.println("Peticion atentida desde el puerto: " + request.getServerPort());
         return productService.getAllsProducts();
     }
 

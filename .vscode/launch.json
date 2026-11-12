@@ -30,7 +30,24 @@
             "name": "InventoryServiceApplication",
             "request": "launch",
             "mainClass": "com.ecommerce.inventory_service.InventoryServiceApplication",
-            "projectName": "inventory-service"
+            "projectName": "inventory-service",
+            "env": {
+                "SPRING_APPLICATION_NAME": "inventory-service",
+                "SERVER_PORT": "0",
+                "EUREKA_INSTANCE_INSTANCEID": "inventory-service:local-1"
+            }
+        },
+        {
+            "type": "java",
+            "name": "InventoryServiceApplication (instancia 2)",
+            "request": "launch",
+            "mainClass": "com.ecommerce.inventory_service.InventoryServiceApplication",
+            "projectName": "inventory-service",
+            "env": {
+                "SPRING_APPLICATION_NAME": "inventory-service",
+                "SERVER_PORT": "0",
+                "EUREKA_INSTANCE_INSTANCEID": "inventory-service:local-2"
+            }
         },
         {
             "type": "java",
@@ -44,14 +61,74 @@
             "name": "OrderServiceApplication",
             "request": "launch",
             "mainClass": "com.ecommerce.order_service.OrderServiceApplication",
-            "projectName": "order-service"
+            "projectName": "order-service",
+            "env": {
+                "SPRING_APPLICATION_NAME": "order-service",
+                "SERVER_PORT": "0",
+                "EUREKA_INSTANCE_INSTANCEID": "order-service:local-1"
+            }
+        },
+        {
+            "type": "java",
+            "name": "OrderServiceApplication (instancia 2)",
+            "request": "launch",
+            "mainClass": "com.ecommerce.order_service.OrderServiceApplication",
+            "projectName": "order-service",
+            "env": {
+                "SPRING_APPLICATION_NAME": "order-service",
+                "SERVER_PORT": "0",
+                "EUREKA_INSTANCE_INSTANCEID": "order-service:local-2"
+            }
         },
         {
             "type": "java",
             "name": "ProductServiceApplication",
             "request": "launch",
             "mainClass": "com.ecommerce.product_service.ProductServiceApplication",
-            "projectName": "product-service"
+            "projectName": "product-service",
+            "env": {
+                "SPRING_APPLICATION_NAME": "product-service",
+                "SERVER_PORT": "0",
+                "EUREKA_INSTANCE_INSTANCEID": "product-service:local-1"
+            }
+        },
+        {
+            "type": "java",
+            "name": "ProductServiceApplication (instancia 2)",
+            "request": "launch",
+            "mainClass": "com.ecommerce.product_service.ProductServiceApplication",
+            "projectName": "product-service",
+            "env": {
+                "SPRING_APPLICATION_NAME": "product-service",
+                "SERVER_PORT": "0",
+                "EUREKA_INSTANCE_INSTANCEID": "product-service:local-2"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Inventory: 2 instancias",
+            "configurations": [
+                "InventoryServiceApplication",
+                "InventoryServiceApplication (instancia 2)"
+            ],
+            "stopAll": true
+        },
+        {
+            "name": "Order: 2 instancias",
+            "configurations": [
+                "OrderServiceApplication",
+                "OrderServiceApplication (instancia 2)"
+            ],
+            "stopAll": true
+        },
+        {
+            "name": "Product: 2 instancias",
+            "configurations": [
+                "ProductServiceApplication",
+                "ProductServiceApplication (instancia 2)"
+            ],
+            "stopAll": true
         }
     ]
 }
